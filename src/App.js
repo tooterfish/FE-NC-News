@@ -4,6 +4,7 @@ import { fetchUser } from './api'
 import { Routes, Route } from 'react-router-dom'
 import UserCard from './components/UserCard'
 import Articles from './components/Articles'
+import Article from './components/Article'
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
           <Route path='/' element={<Articles />} />
           <Route path='/articles' element={<Articles />}/>
           <Route path='/:topic_name' element={<Articles />} />
+          <Route path='/articles/:article_id' element={<Article />} />
         </Routes>
       </main>
     </div>
