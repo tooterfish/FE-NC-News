@@ -2,7 +2,7 @@ export default function Pageinator({currentPage, itemsPerPage, totalItems, setPa
   //WIP paginator
 
   function decPage(e) {
-    if (currentPage !== 0) setPage(+currentPage - 1)
+    if (currentPage > 1) setPage(+currentPage - 1)
   }
 
   function incPage(e) {
