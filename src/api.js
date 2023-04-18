@@ -20,3 +20,8 @@ export async function fetchTopics() {
   const {data} = await newsAPI.get(`/topics`)
   return data
 }
+
+export async function fetchArticle(articleId) {
+  const {data} = await newsAPI.get(`/articles/${articleId}`)
+  return data
+}
