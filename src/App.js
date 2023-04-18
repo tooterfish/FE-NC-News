@@ -1,8 +1,11 @@
 import './App.css'
-import { useState, useEffect } from 'react'
-import { fetchUser } from './api'
+
+import { useState, useEffect, createContext } from 'react'
 import { Routes, Route } from 'react-router-dom'
+
+import { fetchUser } from './api'
 import { fetchTopics } from './api'
+
 import UserCard from './components/UserCard'
 import TitleCard from './components/TitleCard'
 import TopicNav from './components/TopicNav'
@@ -12,16 +15,15 @@ import Article from './components/Article'
 
 function App() {
 
-  const [userName, setUserName] = useState('tickle122')
   const [user, setUser] = useState({})
   const [topics, setTopics] = useState({})
 
   useEffect(() => {
-    fetchUser(userName)
+    fetchUser('tickle122')
     .then((data) => {
       setUser(data)
     })
-  }, [userName])
+  }, [])
 
   useEffect(() => {
     fetchTopics()
