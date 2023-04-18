@@ -63,3 +63,16 @@
   width: 50%;
   margin: auto;
 }
+
+.comment-card {
+  list-style-type: none;
+  border-top: 1px solid black;
+}
+
+.comment-card h4 {
+  display: inline;
+}
+
+.comment-card span {
+  padding-right: .5em;
+}
