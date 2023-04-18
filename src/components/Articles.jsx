@@ -7,14 +7,15 @@ import Pageinator from "./Paginator"
 import TopicDescriptor from "./TopicDescriptor"
 
 export default function Articles({ topic }) {
+
+  const { topic_name } = useParams()
+
   const [currentPage, setPage] = useState('1')
-  const [currentTopic, setTopic ] = useState(topic)
   const [topics, setTopics] = useState({})
   const [articleList, setArticleList] = useState([])
   const [totalArticles, setTotalArticles] = useState()
   const [isLoading, setIsLoading] = useState(true)
 
-  const { topic_name } = useParams()
 
   useEffect(() => {
     fetchTopics()
@@ -28,20 +29,20 @@ export default function Articles({ topic }) {
   }, [])
 
   useEffect(() => {
-    if (topic_name) setTopic(topic_name)
+
     setIsLoading(true)
-    fetchArticles(currentTopic, currentPage)
+    fetchArticles(topic_name, currentPage)
     .then((data) => {
       setArticleList(data.articles)
       setTotalArticles(data.total_count)
     })
     setIsLoading(false)
-  }, [currentTopic, currentPage, topic_name])
+  }, [currentPage, topic_name])
 
   return <div className="articles">
-    <TopicDescriptor description={topics[currentTopic]}/>
+    <TopicDescriptor description={topics[topic_name]}/>
     <Pageinator currentPage={currentPage} setPage={setPage} itemsPerPage={10} totalItems={totalArticles}/>
-    <ArticleList articleList={articleList}/>
+    {isLoading ? <h3>Loading...</h3> : <ArticleList articleList={articleList}/>}
     <Pageinator currentPage={currentPage} setPage={setPage} itemsPerPage={10} totalItems={totalArticles}/>
   </div>
 }
