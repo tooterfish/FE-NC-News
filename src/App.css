@@ -63,3 +63,9 @@
   width: 50%;
   margin: auto;
 }
+
+.comment-card {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+}

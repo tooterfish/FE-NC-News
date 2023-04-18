@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { fetchArticle } from "../api"
+import Comments from './Comments'
 
 
 export default function Article() {
@@ -23,6 +24,7 @@ export default function Article() {
     <h3>by {article.author}</h3>
     <img src={article.article_img_url} />
     <p>{article.body}</p>
+    <Comments articleId={article_id} totalComments={article.comment_count}/>
   </div>
   
 }

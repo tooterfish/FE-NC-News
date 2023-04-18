@@ -25,3 +25,8 @@ export async function fetchArticle(articleId) {
   const {data} = await newsAPI.get(`/articles/${articleId}`)
   return data
 }
+
+export async function fetchComments(articleId, page) {
+  const {data} = await newsAPI.get(`/articles/${articleId}/comments?p=${page}`)
+  return data
+}
