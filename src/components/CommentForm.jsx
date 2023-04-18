@@ -1,6 +1,9 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { UserContext } from '../contexts/UserProvider'
+import { postComment } from '../api'
 
 export default function CommentForm({articleId, setCommentList}) {
+  const {user} = useContext(UserContext)
   const [newCommentText, setCommentText] = useState('')
 
   function handleChange(e) {
@@ -9,11 +12,19 @@ export default function CommentForm({articleId, setCommentList}) {
 
   function handleSubmit(e) {
     e.preventDefault()
+    if (newCommentText !== '') {
+      postComment(articleId, user.username, newCommentText).then((comment) => {
+        setCommentList((commentList) => {
+          setCommentText('')
+          return [comment, ...commentList]
+        })
+      })
+    }
   }
 
-  return <div className="comment-form">
-    <label htmlFor="new-comment-input">Post new comment </label>
-      <input id="new-comment-input" type="text" onChange={handleChange}></input>
-      <button onSubmit={handleSubmit}>Submit</button>
-  </div>
+  return <form className="comment-form" onSubmit={handleSubmit}>
+      <label htmlFor="new-comment">Post new comment </label>
+      <input id="new-comment" type="text" onChange={handleChange} />
+      <input disabled={!newCommentText} type="submit" value="Submit"/>
+    </form>
 }

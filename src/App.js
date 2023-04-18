@@ -23,7 +23,7 @@ function App() {
     .then((data) => {
       setUser(data)
     })
-  })
+  }, [setUser])
 
   useEffect(() => {
     fetchTopics()
