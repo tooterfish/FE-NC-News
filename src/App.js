@@ -15,7 +15,7 @@ import { UserContext } from './contexts/UserProvider'
 
 
 function App() {
-  const {user, setUser} = useContext(UserContext)
+  const {setUser} = useContext(UserContext)
   const [topics, setTopics] = useState({})
 
   useEffect(() => {
@@ -23,7 +23,7 @@ function App() {
     .then((data) => {
       setUser(data)
     })
-  }, [])
+  })
 
   useEffect(() => {
     fetchTopics()
@@ -39,7 +39,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <UserCard username={user.username} name={user.name} avatarURL={user.avatar_url} />
+        <UserCard />
         <TitleCard />
         <TopicNav topics={topics}/>
       </header>
