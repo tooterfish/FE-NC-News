@@ -76,3 +76,17 @@
 .comment-card span {
   padding-right: .5em;
 }
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid black;
+}
+
+.comment-form label {
+  padding-top: .5em;
+}
+
+.comment-form input {
+  width: 80%;
+}

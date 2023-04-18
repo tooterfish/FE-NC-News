@@ -1,6 +1,6 @@
 import './App.css'
 
-import { useState, useEffect, createContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 import { fetchUser } from './api'
@@ -11,11 +11,11 @@ import TitleCard from './components/TitleCard'
 import TopicNav from './components/TopicNav'
 import Articles from './components/Articles'
 import Article from './components/Article'
+import { UserContext } from './contexts/UserProvider'
 
 
 function App() {
-
-  const [user, setUser] = useState({})
+  const {user, setUser} = useContext(UserContext)
   const [topics, setTopics] = useState({})
 
   useEffect(() => {
