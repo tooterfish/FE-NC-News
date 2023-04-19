@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { fetchComments } from '../api'
 
+import CommentForm from './CommentForm'
 import CommentCard from './CommentCard'
 
 export default function Comments({ articleId, totalComments }) {
@@ -36,6 +37,7 @@ export default function Comments({ articleId, totalComments }) {
   }
 
   return <div className="comments">
+    <CommentForm articleId={articleId} setCommentList={setCommentList}/>
     <ul>
     {
     commentList.map((comment) => {

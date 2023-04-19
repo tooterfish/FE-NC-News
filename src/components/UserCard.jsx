@@ -1,7 +1,17 @@
-export default function UserCard({ username, name, avatarURL }) {
+import { UserContext } from '../contexts/UserProvider'
+import { useContext } from 'react'
+
+export default function UserCard() {
+  const { user } = useContext(UserContext)
+
+  const isUser = () => {
+    if (user.username) return false
+    return true
+  }
 
   return <div className="user-card">
-    <img src={avatarURL} alt="avatar"/>
-    <h4>{username}</h4>
+    { isUser() ? <h3>Loading...</h3> : <>
+    <img src={user.avatar_url} alt={`${user.name}'s avatar`}/>
+    <h4>{user.username}</h4> </>}
   </div>
 }

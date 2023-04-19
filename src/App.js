@@ -1,27 +1,29 @@
 import './App.css'
-import { useState, useEffect } from 'react'
-import { fetchUser } from './api'
+
+import { useState, useEffect, useContext } from 'react'
 import { Routes, Route } from 'react-router-dom'
+
+import { fetchUser } from './api'
 import { fetchTopics } from './api'
+
 import UserCard from './components/UserCard'
 import TitleCard from './components/TitleCard'
 import TopicNav from './components/TopicNav'
 import Articles from './components/Articles'
 import Article from './components/Article'
+import { UserContext } from './contexts/UserProvider'
 
 
 function App() {
-
-  const [userName, setUserName] = useState('tickle122')
-  const [user, setUser] = useState({})
+  const {setUser} = useContext(UserContext)
   const [topics, setTopics] = useState({})
 
   useEffect(() => {
-    fetchUser(userName)
+    fetchUser('tickle122')
     .then((data) => {
       setUser(data)
     })
-  }, [userName])
+  }, [setUser])
 
   useEffect(() => {
     fetchTopics()
@@ -37,7 +39,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <UserCard username={user.username} name={user.name} avatarURL={user.avatar_url} />
+        <UserCard />
         <TitleCard />
         <TopicNav topics={topics}/>
       </header>

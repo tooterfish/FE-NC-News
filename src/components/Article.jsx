@@ -22,7 +22,7 @@ export default function Article() {
     <h2>{article.title}</h2>
     <h3>{article.topic}</h3>
     <h3>by {article.author}</h3>
-    <img src={article.article_img_url} />
+    <img src={article.article_img_url} alt={`image for ${article.title}`}/>
     <p>{article.body}</p>
     <Comments articleId={article_id} totalComments={article.comment_count}/>
   </div>
