@@ -33,7 +33,8 @@ export default function CommentForm({articleId, setCommentList}) {
       setCommentText('')
       })
       .catch((err) => {
-        console.log(err)
+      alert(`Oops, something went wrong: ${err.message}`)
+      setDisable(false)
       })
   }
 
