@@ -39,5 +39,4 @@ export async function postComment(articleId, username, body) {
 
 export async function deleteComment(commentId) {
   await newsAPI.delete(`/comments/${commentId}`)
-  return
 }
