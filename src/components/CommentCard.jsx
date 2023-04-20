@@ -12,7 +12,6 @@ export default function CommentCard({comment}) {
   const date = new Date(comment.created_at)
 
   function handleDelete(e) {
-    console.log(e.target.value)
     setOverlay('show')
     setOverlayText('deleting comment...')
     deleteComment(e.target.value)
