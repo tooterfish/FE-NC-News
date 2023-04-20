@@ -36,3 +36,8 @@ export async function postComment(articleId, username, body) {
   const {data} = await newsAPI.post(`/articles/${articleId}/comments`, { username, body })
   return data.comment
 }
+
+export async function deleteComment(commentId) {
+  await newsAPI.delete(`/comments/${commentId}`)
+  return
+}
