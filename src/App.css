@@ -90,3 +90,16 @@
 .comment-form input {
   width: 80%;
 }
+
+
+.article-sort-form {
+  display: flex;
+  padding-bottom: .5em;
+  margin: auto;
+}
+
+.select-container {
+  display: flex;
+  flex-direction: column;
+  padding-right: .5em;
+}
