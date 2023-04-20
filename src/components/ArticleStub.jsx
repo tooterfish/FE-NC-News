@@ -14,7 +14,7 @@ export default function ArticleStub({article}) {
           <h4>by {article.author}</h4>
           <div className="icon-container">
           <CommentCount commentCount={article.comment_count}/>
-          <VoteButton votes={article.votes} id={article.article_id} voteFunc={voteOnArticle}/>
+          <VoteButton initVotes={article.votes} id={article.article_id} voteFunc={voteOnArticle}/>
           </div>
         </div>
 }

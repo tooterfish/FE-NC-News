@@ -9,7 +9,6 @@ import ArticleContents from "./ArticleContents"
 
 export default function Article() {
   const [article, setArticle] = useState({})
-  const [votes, setVotes] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
   const {article_id} = useParams()
 
@@ -18,7 +17,6 @@ export default function Article() {
     fetchArticle(article_id)
     .then(({article}) => {
       setArticle(article)
-      setVotes(article.votes)
       setIsLoading(false)
     })
   }, [article_id])
@@ -26,7 +24,7 @@ export default function Article() {
   return <div className="article">
     { isLoading ? <h3>Loading...</h3> : <>
     <ArticleContents article={article}/>
-    <VoteButton votes={votes} id={article_id} voteFunc={voteOnArticle}/>
+    <VoteButton initVotes={article.votes} id={article_id} voteFunc={voteOnArticle}/>
     <Comments articleId={article_id} totalComments={article.comment_count}/>
     </>
     }

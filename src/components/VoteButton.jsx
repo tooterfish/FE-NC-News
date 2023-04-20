@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react"
 
-export default function VoteButton({votes, id, voteFunc}) {
+export default function VoteButton({initVotes, id, voteFunc}) {
 
   const [currentVotes, setVotes] = useState()
   const [voted, setVoted] = useState(false)
 
   useEffect(() => {
-    setVotes(votes)
+    setVotes(initVotes)
   }, [])
 
   function handleVote() {
