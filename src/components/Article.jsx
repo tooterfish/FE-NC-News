@@ -23,21 +23,10 @@ export default function Article() {
     })
   }, [article_id])
 
-  function addVote() {
-    setVotes(votes => votes + 1)
-    voteOnArticle(article_id)
-    .then(() => {
-
-    })
-    .catch(() => {
-      setVotes(votes => votes - 1)
-    })
-  }
-
   return <div className="article">
     { isLoading ? <h3>Loading...</h3> : <>
     <ArticleContents article={article}/>
-    <VoteButton votes={votes} addVote={addVote}/>
+    <VoteButton votes={votes} id={article_id} voteFunc={voteOnArticle}/>
     <Comments articleId={article_id} totalComments={article.comment_count}/>
     </>
     }
