@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { fetchArticles, fetchTopics } from "../api"
+import { fetchArticles } from "../api"
 import { useParams, useSearchParams } from "react-router-dom"
 
 import ArticleList from "./ArticleList"
@@ -7,26 +7,14 @@ import Pageinator from "./Paginator"
 import TopicDescriptor from "./TopicDescriptor"
 import ArticleSortForm from "./ArticleSortForm"
 
-export default function Articles({ topic }) {
+export default function Articles({ topics }) {
 
   const { topic_name } = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const [topics, setTopics] = useState({})
   const [articleList, setArticleList] = useState([])
   const [totalArticles, setTotalArticles] = useState()
   const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    fetchTopics()
-    .then(({topics}) => {
-      const topicRef = {}
-      topics.forEach(topic => {
-        topicRef[topic.slug] = topic.description
-      })
-      setTopics(topicRef)
-    })
-  }, [])
 
   //on first page load ensure default params set
   useEffect(() => {
@@ -57,7 +45,7 @@ export default function Articles({ topic }) {
   }, [topic_name, searchParams])
 
   return <div className="articles">
-    <TopicDescriptor description={topics[topic_name]}/>
+    <TopicDescriptor topics={topics}/>
     <ArticleSortForm />
     <Pageinator itemsOnPage={articleList.length} totalItems={totalArticles}/>
     {isLoading ? <h3>Loading...</h3> : <ArticleList articleList={articleList}/>}
