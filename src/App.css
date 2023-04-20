@@ -77,6 +77,19 @@
   padding-right: .5em;
 }
 
+.hide {
+  opacity: 1;
+}
+
+.show {
+  opacity: .3;
+}
+
+.overlay-text {
+  position: relative;
+  left: 40%;
+}
+
 .comment-form {
   display: flex;
   flex-direction: column;
