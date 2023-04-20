@@ -1,13 +1,9 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 export default function VoteButton({initVotes, id, voteFunc}) {
 
-  const [currentVotes, setVotes] = useState()
+  const [currentVotes, setVotes] = useState(initVotes)
   const [voted, setVoted] = useState(false)
-
-  useEffect(() => {
-    setVotes(initVotes)
-  }, [])
 
   function handleVote() {
     setVotes(votes => votes + 1)
@@ -15,9 +11,10 @@ export default function VoteButton({initVotes, id, voteFunc}) {
     voteFunc(id)
     .then(() => {
     })
-    .catch(() => {
+    .catch((err) => {
       setVotes(votes => votes - 1)
       setVoted(false)
+      alert(`Oops, something went wrong: ${err.message}`)
     })
   }
   return <button disabled={voted} onClick={handleVote} className="vote-button">
