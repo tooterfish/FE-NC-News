@@ -52,8 +52,8 @@ export default function Articles({ topic }) {
     .then((data) => {
       setArticleList(data.articles)
       setTotalArticles(data.total_count)
+      setIsLoading(false)
     })
-    setIsLoading(false)
   }, [topic_name, searchParams])
 
   return <div className="articles">
