@@ -11,11 +11,16 @@ export default function CommentCard({comment}) {
   const {user} = useContext(UserContext)
   const date = new Date(comment.created_at)
 
+  function disappearComment() {
+    setDeleted(true)
+  }
+
   function handleDelete(e) {
     setOverlay('show')
     setOverlayText('deleting comment...')
     deleteComment(e.target.value)
     .then(() => {
+      setTimeout(disappearComment, 2000)
     })
     .catch((err) => {
       setOverlayText('oops, something went wrong!')
