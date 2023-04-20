@@ -14,8 +14,8 @@ export default function Article() {
     fetchArticle(article_id)
     .then(({article}) => {
       setArticle(article)
+      setIsLoading(false)
     })
-    setIsLoading(false)
   }, [article_id])
 
   return <div className="article">
@@ -24,6 +24,9 @@ export default function Article() {
     <h3>by {article.author}</h3>
     <img src={article.article_img_url} alt={`image for ${article.title}`}/>
     <p>{article.body}</p>
+    <div className="votes">
+      {article.votes}
+    </div>
     <Comments articleId={article_id} totalComments={article.comment_count}/>
   </div>
   
