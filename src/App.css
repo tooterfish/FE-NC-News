@@ -45,6 +45,7 @@
 }
 
 .article-list li {
+  border-top: 1px solid black;
   list-style-type: none;
 }
 
@@ -124,16 +125,31 @@
   display: flex;
   border: 1px solid black;
   border-radius: 40%;
-  margin: 1em;
+  margin: .5em;
+  background-color: white;
 }
 
 .vote-button:hover {
 }
 
-.vote-sym {
+.sym {
   margin: auto;
 }
 
-.vote-num {
+.num {
   margin: auto;
+}
+
+.comment-count {
+  font-size: medium;
+  width: 3.5em;
+  height: 2em;
+  display: flex;
+  border: 1px solid black;
+  border-radius: 40%;
+  margin: .5em;
+}
+
+.icon-container {
+  display: inline-flex;
 }

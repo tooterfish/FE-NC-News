@@ -18,10 +18,10 @@ export default function VoteButton({votes, id, voteFunc}) {
     })
   }
   return <button onClick={handleVote} className="vote-button">
-          <div className="vote-sym">
+          <div className="sym">
             &#11088;
           </div>
-          <div className="vote-num">
+          <div className="num">
             {currentVotes}
           </div>
         </button>
