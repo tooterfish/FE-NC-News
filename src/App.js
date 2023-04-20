@@ -2,6 +2,7 @@ import './App.css'
 
 import { useState, useEffect, useContext } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { UserContext } from './contexts/UserProvider'
 
 import { fetchUser } from './api'
 import { fetchTopics } from './api'
@@ -11,8 +12,6 @@ import TitleCard from './components/TitleCard'
 import TopicNav from './components/TopicNav'
 import Articles from './components/Articles'
 import Article from './components/Article'
-import { UserContext } from './contexts/UserProvider'
-
 
 function App() {
   const {setUser} = useContext(UserContext)
@@ -45,10 +44,10 @@ function App() {
       </header>
       <main className="App-body">
         <Routes>
-          <Route path='/' element={<Articles />} />
-          <Route path='/articles' element={<Articles />}/>
-          <Route path='/:topic_name' element={<Articles />} />
-          <Route path='/articles/:article_id' element={<Article />} />
+          <Route path='/' element={<Articles topics={topics}/>} />
+          <Route path='/articles' element={<Articles topics={topics}/>}/>
+          <Route path='/:topic_name/*' element={<Articles topics={topics}/>} />
+          <Route path='/articles/:article_id' element={<Article topics={topics}/>} />
         </Routes>
       </main>
     </div>

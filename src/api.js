@@ -9,10 +9,11 @@ export async function fetchUser(userName) {
   return data.user
 }
 
-export async function fetchArticles(topic, page) {
+export async function fetchArticles(topic, page, sortBy, orderBy) {
   let topicQuery = ''
   if (topic) topicQuery = `&topic=${topic}`
-  const {data} = await newsAPI.get(`/articles?p=${page}${topicQuery}`)
+  const searchQuery = `&sort_by=${sortBy}&order=${orderBy}`
+  const {data} = await newsAPI.get(`/articles?p=${page}${topicQuery}${searchQuery}`)
   return data
 }
 
