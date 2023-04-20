@@ -9,6 +9,11 @@ export async function fetchUser(userName) {
   return data.user
 }
 
+export async function fetchTopics() {
+  const {data} = await newsAPI.get(`/topics`)
+  return data
+}
+
 export async function fetchArticles(topic, page, sortBy, orderBy) {
   let topicQuery = ''
   if (topic) topicQuery = `&topic=${topic}`
@@ -17,14 +22,14 @@ export async function fetchArticles(topic, page, sortBy, orderBy) {
   return data
 }
 
-export async function fetchTopics() {
-  const {data} = await newsAPI.get(`/topics`)
-  return data
-}
-
 export async function fetchArticle(articleId) {
   const {data} = await newsAPI.get(`/articles/${articleId}`)
   return data
+}
+
+export async function voteOnArticle(articleId) {
+  const {data} = await newsAPI.patch(`articles/${articleId}`, { inc_votes: 1 })
+  return data.article
 }
 
 export async function fetchComments(articleId, page) {
