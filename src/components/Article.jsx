@@ -27,7 +27,7 @@ export default function Article() {
   }, [article_id])
 
   return <div className="article">
-    { isLoading ? <h3>Loading...</h3> : 
+    { isLoading ? <div className="loader"></div> : 
     article.body === undefined ? <><h3>oops, something went wrong!</h3><h4>{err.message}: {err.response.data.msg}</h4></> :
     <>
     <ArticleContents article={article}/>
