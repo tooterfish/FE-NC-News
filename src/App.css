@@ -90,11 +90,11 @@
   padding-right: .5em;
 }
 
-.hide {
+.hidden {
   opacity: 1;
 }
 
-.show {
+.visible {
   opacity: .3;
 }
 

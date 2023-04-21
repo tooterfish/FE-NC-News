@@ -5,7 +5,7 @@ import { deleteComment } from '../api'
 export default function CommentCard({comment}) {
 
   const [isDeleted, setDeleted] = useState(false)
-  const [overlay, setOverlay] = useState('hide')
+  const [visible, setVisible] = useState('hidden')
   const [overlayText, setOverlayText] = useState('')
 
   const {user} = useContext(UserContext)
@@ -16,26 +16,26 @@ export default function CommentCard({comment}) {
   }
 
   function handleDelete(e) {
-    setOverlay('show')
-    setOverlayText('deleting comment...')
+    setVisible('visible')
     deleteComment(e.target.value)
     .then(() => {
-      setTimeout(disappearComment, 2000)
+      setTimeout(disappearComment, 1000)
     })
     .catch((err) => {
       setOverlayText('oops, something went wrong!')
-      setOverlay('hide')
+      setVisible('hidden')
     })
   }
 
   return <> { (isDeleted) ? <></> : <li className={`comment-card`}>
     <span className="overlay-text">{overlayText}</span>
-    <div className={overlay}>
+    <div className="loader" style={{position:'absolute', margin:'auto', left:'50%', visibility:visible}}></div>
+    <div className={visible}>
     <h4>{comment.author}</h4>
     <span>posted on {date.toLocaleDateString()} at {date.toLocaleTimeString()}</span>
     <p>{comment.body}</p>
     <span>votes: {comment.votes}</span>
-    { (user.username !== comment.author || overlay === 'show') ? <></> : <button id="delete-comment" value={comment.comment_id} onClick={handleDelete}>Delete</button>}
+    { (user.username !== comment.author || visible === 'visible') ? <></> : <button id="delete-comment" value={comment.comment_id} onClick={handleDelete}>Delete</button>}
     </div>
   </li>
   } </> 
