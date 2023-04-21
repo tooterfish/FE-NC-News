@@ -7,14 +7,11 @@ import CommentCard from './CommentCard'
 export default function Comments({ articleId, totalComments }) {
   const [commentList, setCommentList] = useState([])
   const [currentPage, setPage] = useState(1)
-  const [isLoading, setIsLoading] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
   const [moreCommentsFound, setMoreCommentsFound] = useState(true)
 
   useEffect(() => {
-    setIsLoading(true)
     loadMoreComments()
-    setIsLoading(false)
   }, [])
 
 
@@ -45,6 +42,6 @@ export default function Comments({ articleId, totalComments }) {
     })
     }
     </ul>
-    {loadingMore ? <h3>Loading...</h3>: <button onClick={loadMoreComments}>{moreCommentsFound ? <>Load more comments</> : <>No more comments</>}</button>}
+    {loadingMore ? <div className="loader"></div>: <button onClick={loadMoreComments}>{moreCommentsFound ? <>Load more comments</> : <>No more comments</>}</button>}
   </div>
 }

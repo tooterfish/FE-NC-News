@@ -10,7 +10,7 @@ export default function UserCard() {
   }
 
   return <div className="user-card">
-    { isUser() ? <h3>Loading...</h3> : <>
+    { isUser() ? <div className="loader"></div> : <>
     <img src={user.avatar_url} alt={`${user.name}'s avatar`}/>
     <h4>{user.username}</h4> </>}
   </div>

@@ -56,7 +56,7 @@ export default function Articles({ topics }) {
     <TopicDescriptor topics={topics}/>
     <ArticleSortForm />
     <Pageinator inactive={inactive} itemsPerPage={10} totalItems={totalArticles}/>
-    { isLoading ? <h3>Loading...</h3> : 
+    { isLoading ? <div className="loader"></div>: 
       articleList === undefined ? <><h3>oops, something went wrong!</h3><h4>{err.message}: {err.response.data.msg}</h4></> :
     <>
     <ArticleList articleList={articleList}/>
