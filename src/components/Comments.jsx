@@ -11,6 +11,8 @@ export default function Comments({ articleId, totalComments }) {
   const [moreCommentsFound, setMoreCommentsFound] = useState(true)
 
   useEffect(() => {
+    if (commentList.length === 0) loadMoreComments()
+    
     function onScroll() {
       const scrollTop = document.documentElement.scrollTop
       const scrollHeight = document.documentElement.scrollHeight
