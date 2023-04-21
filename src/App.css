@@ -39,6 +39,18 @@
   margin: auto;
 }
 
+.paginator button {
+  width: 1.5em;
+  height: 1.5em;
+  padding-left: 5px;
+  margin: 2px;
+}
+
+.paginator button.current {
+  background-color: lightblue;
+  color: white;
+}
+
 .articles {
   display: flex;
   flex-direction: column;

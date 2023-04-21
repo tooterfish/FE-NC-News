@@ -1,27 +1,28 @@
+// import { useEffect, useState } from 'react'
 import { useSearchParams } from "react-router-dom"
 
-export default function Pageinator({itemsOnPage, totalItems}) {
+export default function Pageinator({itemsOnPage, itemsPerPage, totalItems}) {
   //WIP paginator
   const [searchParams, setSearchParams] = useSearchParams()
 
-  function decPage(e) {
-    const page = +searchParams.get('p')
-    if (page > 1) {
-      searchParams.set('p', page - 1)
-      setSearchParams(searchParams)
-    }
-  }
+  const numPages = Math.ceil(totalItems/itemsPerPage)
+  let pageNums = []
+  if (numPages > 0) pageNums = Array.from(new Array(numPages), (_, i) => i + 1)
 
-  function incPage(e) {
-    const page = +searchParams.get('p')
-    searchParams.set('p', page + 1)
+  function changePage(e) {
+    searchParams.set('p', e.target.value)
     setSearchParams(searchParams)
   }
 
   return <div className="paginator">
-    <button onClick={decPage}>-</button>
-    <span>{searchParams.get('p')}</span>
-    <button onClick={incPage}>+</button>
-    {/* <span>items on page: {itemsOnPage} total: {totalItems}</span> */}
+    {/* <button disabled={+searchParams.get('p') === 1} value={1} onClick={changePage}>&laquo;</button> */}
+    <button disabled={+searchParams.get('p') === 1} value={String(+searchParams.get('p') - 1)} onClick={changePage}>&lsaquo;</button>
+    { 
+    pageNums.map((pageNum) => {
+      return <button className={(+searchParams.get('p') === pageNum) ? 'current' : ''} key={pageNum} value={pageNum} onClick={changePage}>{pageNum}</button>
+    }) 
+    }
+    <button disabled={+searchParams.get('p') === numPages} value={String(+searchParams.get('p') + 1)} onClick={changePage}>&rsaquo;</button>
+    {/* <button disabled={+searchParams.get('p') === numPages} value={String(numPages)} onClick={changePage}>&raquo;</button> */}
   </div>
 }
