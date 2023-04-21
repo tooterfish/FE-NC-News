@@ -1,7 +1,7 @@
 // import { useEffect, useState } from 'react'
 import { useSearchParams } from "react-router-dom"
 
-export default function Pageinator({itemsPerPage, totalItems, isLoading}) {
+export default function Pageinator({itemsPerPage, totalItems, inactive}) {
   //WIP paginator
   const [searchParams, setSearchParams] = useSearchParams()
 
@@ -16,13 +16,13 @@ export default function Pageinator({itemsPerPage, totalItems, isLoading}) {
 
   return <div className="paginator">
     {/* <button disabled={+searchParams.get('p') === 1} value={1} onClick={changePage}>&laquo;</button> */}
-    <button disabled={+searchParams.get('p') === 1 || isLoading} value={String(+searchParams.get('p') - 1)} onClick={changePage}>&lsaquo;</button>
+    <button disabled={+searchParams.get('p') === 1 || inactive} value={String(+searchParams.get('p') - 1)} onClick={changePage}>&lsaquo;</button>
     { 
     pageNums.map((pageNum) => {
-      return <button disabled={isLoading} className={(+searchParams.get('p') === pageNum) ? 'current' : ''} key={pageNum} value={pageNum} onClick={changePage}>{pageNum}</button>
+      return <button disabled={inactive} className={(+searchParams.get('p') === pageNum) ? 'current' : ''} key={pageNum} value={pageNum} onClick={changePage}>{pageNum}</button>
     }) 
     }
-    <button disabled={+searchParams.get('p') === numPages || isLoading} value={String(+searchParams.get('p') + 1)} onClick={changePage}>&rsaquo;</button>
+    <button disabled={+searchParams.get('p') === numPages || inactive} value={String(+searchParams.get('p') + 1)} onClick={changePage}>&rsaquo;</button>
     {/* <button disabled={+searchParams.get('p') === numPages} value={String(numPages)} onClick={changePage}>&raquo;</button> */}
   </div>
 }
