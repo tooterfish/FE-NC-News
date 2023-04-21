@@ -47,8 +47,11 @@ export default function Articles({ topics }) {
   return <div className="articles">
     <TopicDescriptor topics={topics}/>
     <ArticleSortForm />
-    <Pageinator itemsOnPage={articleList.length} totalItems={totalArticles}/>
-    {isLoading ? <h3>Loading...</h3> : <ArticleList articleList={articleList}/>}
-    <Pageinator itemsOnPage={articleList.length} totalItems={totalArticles}/>
+    { isLoading ? <h3>Loading...</h3> : <> 
+    <Pageinator itemsPerPage={10} totalItems={totalArticles}/>
+    <ArticleList articleList={articleList}/>
+    <Pageinator itemsPerPage={10} totalItems={totalArticles}/>
+    </>
+    }
   </div>
 }
