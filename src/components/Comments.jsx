@@ -11,27 +11,36 @@ export default function Comments({ articleId, totalComments }) {
   const [moreCommentsFound, setMoreCommentsFound] = useState(true)
 
   useEffect(() => {
-    loadMoreComments()
-  }, [])
+    function onScroll() {
+      const scrollTop = document.documentElement.scrollTop
+      const scrollHeight = document.documentElement.scrollHeight
+      const clientHeight = document.documentElement.clientHeight
+  
+      if ((scrollTop + clientHeight >= scrollHeight)) loadMoreComments()
+    }
+
+    function loadMoreComments() {
+      setLoadingMore(true)
+      fetchComments(articleId, currentPage).then((response) => {
+        if(response.comments.length !== 0) {
+          const newCommentList = [...commentList].concat(response.comments)
+          setCommentList(newCommentList)
+          setPage(currentPage + 1)
+          setMoreCommentsFound(true)
+          setLoadingMore(false)
+        }
+        else {
+          setLoadingMore(false)
+          setMoreCommentsFound(false)
+        }
+      })
+    }
+
+    window.addEventListener('scroll', onScroll)
+    return () => { window.removeEventListener('scroll', onScroll)}
+  }, [currentPage, articleId, commentList])
 
 
-  //will use this function to try to make a fancy infinite scroll later, for now its a button
-  function loadMoreComments() {
-    setLoadingMore(true)
-    fetchComments(articleId, currentPage).then((response) => {
-      if(response.comments.length !== 0) {
-        const newCommentList = [...commentList].concat(response.comments)
-        setCommentList(newCommentList)
-        setPage(currentPage + 1)
-        setMoreCommentsFound(true)
-        setLoadingMore(false)
-      }
-      else {
-        setLoadingMore(false)
-        setMoreCommentsFound(false)
-      }
-    })
-  }
 
   return <div className="comments">
     <CommentForm articleId={articleId} setCommentList={setCommentList}/>
@@ -42,6 +51,6 @@ export default function Comments({ articleId, totalComments }) {
     })
     }
     </ul>
-    {loadingMore ? <div className="loader"></div>: <button onClick={loadMoreComments}>{moreCommentsFound ? <>Load more comments</> : <>No more comments</>}</button>}
+    {(loadingMore && moreCommentsFound) ? <div className="loader"></div> : <></>}
   </div>
 }
